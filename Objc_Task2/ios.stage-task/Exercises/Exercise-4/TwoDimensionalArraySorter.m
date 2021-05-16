@@ -26,16 +26,20 @@
     }]];
     
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    if (numbersArray.count == 0) {
-        [result setArray:namesArray];
-    }
-    if (namesArray.count == 0) {
-        [result setArray:numbersArray];
-    }
     
-    if (numbersArray > 0 && namesArray > 0) {
+    if (numbersArray.count > 0 && namesArray.count > 0) {
         [result addObject:numbersArray];
         [result addObject:namesArray];
+    } else {
+        if (numbersArray.count == 0) {
+            [namesArray setArray:[namesArray sortedArrayUsingComparator:^NSComparisonResult(NSString *first, NSString *second) {
+                return [first compare:second];
+            }]];
+            [result setArray:namesArray];
+        }
+        if (namesArray.count == 0) {
+            [result setArray:numbersArray];
+        }
     }
     
     return result;
