@@ -22,7 +22,7 @@
     }]];
     
     [namesArray setArray:[namesArray sortedArrayUsingComparator:^NSComparisonResult(NSString *first, NSString *second) {
-        return [first compare:second];
+        return [second compare:first];
     }]];
     
     NSMutableArray *result = [[NSMutableArray alloc] init];
@@ -31,6 +31,11 @@
     }
     if (namesArray.count == 0) {
         [result setArray:numbersArray];
+    }
+    
+    if (numbersArray > 0 && namesArray > 0) {
+        [result addObject:numbersArray];
+        [result addObject:namesArray];
     }
     
     return result;
