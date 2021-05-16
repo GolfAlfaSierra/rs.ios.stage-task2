@@ -2,23 +2,15 @@
 
 
 int findPair(NSArray<NSNumber*> *array, NSNumber* target) {
-    int counter = 0;
-    NSMutableSet<NSNumber*>* set = [[NSMutableSet alloc] init];
-    
-    for (NSNumber *num in array){
-        
-        if ([set containsObject:[NSNumber numberWithInt:(int)([num intValue] - [target intValue])]]) {
-            counter+=1;
+    int count = 0;
+    for (int i = 0; i < array.count; ++i) {
+        for (int j = i+1; j < array.count; ++j) {
+            if (abs(array[i].intValue - array[j].intValue) == target.intValue) {
+                ++count;
+            }
         }
-        
-        if ([set containsObject:[NSNumber numberWithInt:(int)([num intValue] + [target intValue])]]) {
-            counter+=1;
-        }
-        
-        [set addObject:num];
     }
-    
-    return counter;
+    return count;
 }
 
 @implementation Pairs
